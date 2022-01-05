@@ -24,8 +24,36 @@ fn main() {
     let mut s: String=String::from("new");
     
     change(&mut s);
+    let r1=&mut s;
+    println!("{}", r1);
+    
+    let r2=&mut s;
+    println!("{}", r2);
+    /*
+        Can't use multiple mutable references simultaneously
+        
+        /*
+            // This will cry for r2 reference.
+        let r1=&mut s;
+        println!("{}", r1);
+        
+        let r2=&mut s;
+        println!("{}", r2);
+        println!("{}", r1); // since r1 usage is not completely over before having r2 reference.
+        */
+    */
+    // You can have multiple immutable references but not multiple mutable references simultaneously. Also you can't have mutable and immutable references simultaneously. Users of an immutable reference don’t expect the values to suddenly change out from under them!
+    
     println!("{}",s)
 }
+/*
+// This will not be permitted, you can't create dangling references(references who are just there but pointing to nothing.)
+fn dangle() -> &String {
+    let s = String::from("hello"); // s is a new String
+    
+    &s // we return a reference to the String, s
+} // Here, s goes out of scope, and is dropped. Its memory goes away.
+*/
 
 /* 
     // this will not work, since the references are immutable by default as well.
