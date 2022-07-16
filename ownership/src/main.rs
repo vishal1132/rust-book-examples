@@ -28,6 +28,7 @@ fn main() {
     println!("{}", r1);
 
     let r2 = &mut s;
+    // println!("{}", r1); // can't do this since you can't have multiple mutable references
     println!("{}", r2);
     /*
         Can't use multiple mutable references simultaneously
@@ -50,13 +51,13 @@ fn main() {
     let mut s: String = String::from("some sentence that doesn't make sense.");
     let first_word_literal = first_word(&s);
     println!("first word is {}", first_word_literal);
-    s.clear(); // is not permitted
-    println!("{}", s);
-    // println!("first word is {}",first_word);
+    s.clear(); // is not permitted if line 56 is uncommented coz this borrows s as mutable, and therefore no immutable reference can be used later
+    println!("after clear {}", s);
+    // println!("first word is {}",first_word_literal);
     let s: String = String::from("some stupid string");
     let some = &s[0..4];
     let stupid = "stupid";
-    let stupid: &str = &s[5..5 + stupid.len()];
+    let stupid: &str = &s[5..(5 + stupid.len())];
     println!("{}", some);
     println!("{}", stupid);
 
@@ -88,6 +89,7 @@ fn main() {
     assert_eq!(slice,&[2,3]); // this panics if the assertion fails.
 
 }
+
 fn first_word(s: &str) -> &str {
     let barray = s.as_bytes();
     for (i, &item) in barray.iter().enumerate() {

@@ -2,6 +2,10 @@ use rand::Rng;
 use std::cmp::Ordering;
 use std::io;
 
+const MAX_GUESSES: u32 = 5;
+
+
+
 fn main() {
     println!("Guess the number!");
 
